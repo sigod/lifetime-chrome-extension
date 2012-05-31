@@ -1,0 +1,21 @@
+{
+	"name": "lifetime",
+	"version": "0.2.5.0",
+	"manifest_version": 2,
+
+	"offline_enabled": true,
+	"update_url": "http://dl.dropbox.com/u/23344505/lifetime/updates.xml",
+	
+	"browser_action": {
+		"default_icon": "icon_19.png",
+		"default_popup": "popup.html"
+	},
+
+	"background": {
+		"page": "background.html"
+	},
+
+	"options_page": "options.html",
+
+	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}
