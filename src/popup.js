@@ -1,5 +1,6 @@
 
 /// <reference path="data.js" />
+/// <reference path="storage.js" />
 
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-31797208-1']);
@@ -51,15 +52,15 @@ function toInTimeFormat(time) {
 var interval;
 var element;
 var finishTime = function () {
-    var day = parseInt(localStorage['day']);
-    var month = parseInt(localStorage['month']);
-    var year = parseInt(localStorage['year']);
-    var sex = localStorage['sex'];
+    var day = storage.local.day;
+    var month = storage.local.month;
+    var year = storage.local.year;
+    var sex = storage.local.sex;
     if (sex !== 'male' && sex !== 'female') {
         sex = 'average';
     }
 
-    var country = localStorage['country'];
+    var country = storage.local.country;
     if (country) {
         for (var i = 0; i < data.length; i++) {
             if (data[i].country === country) {

@@ -1,5 +1,6 @@
 
 /// <reference path="data.js" />
+/// <reference path="storage.js" />
 
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-31797208-1']);
@@ -75,18 +76,19 @@ function init() {
 }
 
 function restore_options() {
-    var day = parseInt(localStorage['day']);
+    var day = storage.local.day;
     if (day) {
         document.getElementById('day').item(day).selected = true;
     }
 
-    var month = parseInt(localStorage['month']);
+    var month = storage.local.month;
     if (month) {
         document.getElementById('month').item(month + 1).selected = true;
     }
 
-    var year = localStorage['year'];
+    var year = storage.local.year;
     if (year) {
+        year = year.toString();
         var el = document.getElementById('year');
         for (var i = 0; i < el.children.length; i++) {
             if (el.children[i].value === year) {
@@ -96,12 +98,12 @@ function restore_options() {
         }
     }
 
-    var sex = localStorage['sex'];
+    var sex = storage.local.sex;
     if (sex) {
         document.getElementById('sex').item(sex === 'male' ? 1 : 2).selected = true;
     }
 
-    var country = localStorage['country'];
+    var country = storage.local.country;
     if (country) {
         var el = document.getElementById('country');
         for (var i = 0; i < el.children.length; i++) {
@@ -115,19 +117,21 @@ function restore_options() {
 
 function save_options() {
     var day = document.getElementById('day');
-    localStorage['day'] = day.children[day.selectedIndex].value;
+    storage.local.day = parseInt(day.children[day.selectedIndex].value);
 
     var month = document.getElementById('month');
-    localStorage['month'] = month.children[month.selectedIndex].value;
+    storage.local.month = parseInt(month.children[month.selectedIndex].value);
 
     var year = document.getElementById('year');
-    localStorage['year'] = year.children[year.selectedIndex].value;
+    storage.local.year = parseInt(year.children[year.selectedIndex].value);
 
     var sex = document.getElementById('sex');
-    localStorage['sex'] = sex.children[sex.selectedIndex].value;
+    storage.local.sex = sex.children[sex.selectedIndex].value;
 
     var country = document.getElementById('country');
-    localStorage['country'] = country.children[country.selectedIndex].value;
+    storage.local.country = country.children[country.selectedIndex].value;
+
+    storage.save();
 
     var save_status = document.getElementById('save-status');
     save_status.textContent = 'Options saved.';
