@@ -1,3 +1,8 @@
+
+body {
+    margin: 0 11px 0 11px;
+}
+
 #time {
     font-size: 30pt;
     font-weight: bold;
