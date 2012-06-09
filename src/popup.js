@@ -103,4 +103,4 @@ function start() {
     }, 33);
 }
 
-window.onload = start;
+window.addEventListener('DOMContentLoaded', start, false);
