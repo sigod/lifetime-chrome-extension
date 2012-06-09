@@ -11,7 +11,7 @@ _gaq.push(['_trackPageview']);
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-window.onload = function () {
+window.addEventListener('DOMContentLoaded', function () {
     init();
     restore_options();
 
@@ -20,7 +20,7 @@ window.onload = function () {
 
         save_options();
     }, false);
-};
+}, false);
 
 function init() {
     var day = document.getElementById('day');
