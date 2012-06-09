@@ -31,10 +31,10 @@
             check();
 
             function check() {
-                self.update();
-
                 // wait for next second come in to update
                 self.timeout = window.setTimeout(check, 1001 - (new Date()).getTime() % 1000);
+
+                self.update();
             }
         },
 
