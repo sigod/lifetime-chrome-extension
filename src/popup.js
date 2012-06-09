@@ -84,31 +84,31 @@
             var times = new Array(6);
 
             // seconds
-            times[5] = parseInt(time % 60);
+            times[5] = Math.floor(time % 60);
             if (times[5] < 10) { times[5] = '0' + times[5]; }
             time /= 60;
 
             // minutes
-            times[4] = parseInt(time % 60);
+            times[4] = Math.floor(time % 60);
             if (times[4] < 10) { times[4] = '0' + times[4]; }
             time /= 60;
 
             // hours
-            times[3] = parseInt(time % 24);
+            times[3] = Math.floor(time % 24);
             if (times[3] < 10) { times[3] = '0' + times[3]; }
             time /= 24;
 
             // days
-            times[2] = parseInt(time % 7);
+            times[2] = Math.floor(time % 7);
             time /= 7;
 
             // weeks
-            times[1] = parseInt(time % 52);
+            times[1] = Math.floor(time % 52);
             if (times[1] < 10) { times[1] = '0' + times[1]; }
             time /= 52;
 
             // years
-            times[0] = parseInt(time);
+            times[0] = Math.floor(time);
 
             if (times[0] < 10) { times[0] = '000' + times[0]; }
             else if (times[0] < 100) { times[0] = '00' + times[0]; }
