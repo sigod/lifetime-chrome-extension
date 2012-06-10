@@ -50,28 +50,22 @@
         },
 
         _getEndTime: function () {
-            var day = storage.local.day;
-            var month = storage.local.month;
-            var year = storage.local.year;
-            var sex = storage.local.sex;
-            if (sex !== 'male' && sex !== 'female') {
-                sex = 'average';
-            }
+            var l = storage.local;
+            var year, month, day, country;
 
-            var country = storage.local.country;
-            if (country) {
+            if (l.country) {
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].country === country) {
+                    if (data[i].country === l.country) {
                         country = i;
                         break;
                     }
                 }
             }
 
-            if (day && typeof month === 'number' && year) {
-                year += (typeof country === 'number' ? parseFloat(data[country][sex]) : 64);
-                month += (year - Math.floor(year)) * 12;
-                day += (month - Math.floor(month)) * 31;
+            if (l.year) {
+                year = l.year + (typeof country === 'number' ? parseFloat(data[country][l.sex]) : 64);
+                month = (l.month || 0) + (year - Math.floor(year)) * 12;
+                day = (l.day || 1) + (month - Math.floor(month)) * 31;
 
                 return (new Date(year, month, day)).getTime();
             }
