@@ -133,9 +133,40 @@ function save_options() {
 
     storage.save();
 
+    storage.local.end = calculateEndTime();
+
+    storage.save();
+
     var save_status = document.getElementById('save-status');
     save_status.textContent = 'Options saved.';
     setTimeout(function () {
         save_status.textContent = '';
     }, 1000);
+    
+
+    function calculateEndTime() {
+        /// <returns type="number" />
+
+        var l = storage.local;
+        var year, month, day, country;
+
+        if (l.country) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].country === l.country) {
+                    country = i;
+                    break;
+                }
+            }
+        }
+
+        if (l.year) {
+            year = l.year + (typeof country === 'number' ? parseFloat(data[country][l.sex]) : 64);
+            month = (l.month || 0) + (year - Math.floor(year)) * 12;
+            day = (l.day || 1) + (month - Math.floor(month)) * 31;
+
+            return (new Date(year, month, day)).getTime();
+        }
+
+        return 0;
+    }
 }
