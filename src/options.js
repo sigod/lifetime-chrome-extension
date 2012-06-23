@@ -131,9 +131,8 @@ function save_options() {
     var country = document.getElementById('country');
     storage.local.country = country.children[country.selectedIndex].value;
 
-    storage.save();
-
-    storage.local.end = calculateEndTime();
+    var l = storage.local;
+    storage.local.end = calculateEndTime(l.day, l.month, l.year, l.sex, l.country);
 
     storage.save();
 
@@ -144,25 +143,22 @@ function save_options() {
     }, 1000);
     
 
-    function calculateEndTime() {
+    function calculateEndTime(day, month, year, sex, country) {
         /// <returns type="number" />
 
-        var l = storage.local;
-        var year, month, day, country;
-
-        if (l.country) {
+        if (country) {
             for (var i = 0; i < data.length; i++) {
-                if (data[i].country === l.country) {
+                if (data[i].country === country) {
                     country = i;
                     break;
                 }
             }
         }
 
-        if (l.year) {
-            year = l.year + (typeof country === 'number' ? parseFloat(data[country][l.sex]) : 64);
-            month = (l.month || 0) + (year - Math.floor(year)) * 12;
-            day = (l.day || 1) + (month - Math.floor(month)) * 31;
+        if (year) {
+            year += (typeof country === 'number' ? parseFloat(data[country][sex]) : 64);
+            month = (month || 0) + (year - Math.floor(year)) * 12;
+            day = (day || 1) + (month - Math.floor(month)) * 31;
 
             return (new Date(year, month, day)).getTime();
         }
