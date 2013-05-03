@@ -35,6 +35,10 @@
             }
         }
 
+        function isLeap(year) {
+            return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+        }
+
         setDays(31);
 
         var month = document.getElementById('month');
@@ -45,7 +49,7 @@
             if (value === 1) {
                 var year_value = parseInt(year.children[year.selectedIndex].value);
 
-                setDays(year_value % 4 === 0 ? 29 : 28);
+                setDays(isLeap(year_value) ? 29 : 28);
             }
             else {
                 var is30 = [3, 5, 8, 10].indexOf(value) !== -1;
